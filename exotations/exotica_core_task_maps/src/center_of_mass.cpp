@@ -189,16 +189,15 @@ void CenterOfMass::InitializeDebug()
     com_links_marker_.color.r = 0.5f;
     com_links_marker_.color.g = 0.f;
     com_links_marker_.color.b = 0.f;
-    com_links_marker_.scale.x = com_links_marker_.scale.y = com_links_marker_.scale.z = .02f;
+    com_links_marker_.scale.x = com_links_marker_.scale.y = com_links_marker_.scale.z = .02;
     com_links_marker_.action = visualization_msgs::Marker::ADD;
 
-    com_marker_.type = visualization_msgs::Marker::CYLINDER;
+    com_marker_.type = visualization_msgs::Marker::SPHERE;
     com_marker_.color.a = 1;
     com_marker_.color.r = 1;
     com_marker_.color.g = 0;
     com_marker_.color.b = 0;
-    com_marker_.scale.x = com_marker_.scale.y = .15;
-    com_marker_.scale.z = .02;
+    com_marker_.scale.x = com_marker_.scale.y = com_marker_.scale.z = .05;
     com_marker_.action = visualization_msgs::Marker::ADD;
 
     com_links_marker_.header.frame_id = com_marker_.header.frame_id =

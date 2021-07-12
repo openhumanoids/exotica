@@ -141,8 +141,9 @@ struct EndPoseTask : public Task
     void SetRho(const std::string& task_name, const double rho_in);
     double GetRho(const std::string& task_name) const;
 
-    Eigen::VectorXd GetTaskError(const std::string& task_name) const;
     Eigen::MatrixXd GetS(const std::string& task_name) const;
+    Eigen::VectorXd GetTaskError(const std::string& task_name) const;
+    Eigen::MatrixXd GetTaskJacobian(const std::string& task_name) const;
 
     Eigen::VectorXd rho;
     TaskSpaceVector y;

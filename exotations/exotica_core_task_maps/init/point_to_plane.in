@@ -9,3 +9,7 @@ extend <exotica_core/task_map>
 // VectorXd BaseOffset   > starting point of line in Base frame
 
 // The frame of each Link in the given vector of EndEffectors will be aligned with the plane defined by the origin of the Base frame and its UnitZ-normal.
+
+// When PositiveOnly is true, the output will be passed through a ReLU activation.
+// This enables use as an inequality-like constraint in unconstrained optimization
+Optional bool PositiveOnly = false;

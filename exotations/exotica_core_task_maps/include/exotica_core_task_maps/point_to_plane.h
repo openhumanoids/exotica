@@ -38,6 +38,12 @@
 
 namespace exotica
 {
+/**
+ * @brief PointToPlane TaskMap: Penalises the z-distance between two frames - or the distance of a point (represented by the Link frame) spanned by the normal represented through the z-axis of a second frame (represented by the Base frame).
+ * 
+ * This TaskMap returns the signed distance to the plane by default. In an unconstrained optimisation this would correspond to an equality constraint and force the distance to the plane to be minimised. In order to use the TaskMap as an inequality constraint, the parameter 'PositiveOnly' can be set to true. In this case, the TaskMap applies a ReLU-like activation ($x = \max(0, x)$) to the output.
+ * 
+ */
 class PointToPlane : public TaskMap, public Instantiable<PointToPlaneInitializer>
 {
 public:
