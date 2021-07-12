@@ -22,7 +22,7 @@ jobs:
                              libselinux1 libxdamage1 libxfixes3 libxxf86vm1
     - name: Build Exotica on Unix
       if: runner.os == 'Linux' || runner.os == 'macOS'
-      working-directory: ./exotica_core
+      working-directory: ./exotica_superbuild
       shell: bash -l -eo pipefail {0}
       run: |
         if [[ `uname -s` == "Linux" ]]; then
@@ -34,26 +34,30 @@ jobs:
         export CTEST_OUTPUT_ON_FAILURE=1
         mkdir build
         cd build
+        ln -s $GITHUB_WORKSPACE/exotica_superbuild/CMakeLists_subdirectory.txt $GITHUB_WORKSPACE/exotica_superbuild/CMakeLists.txt # symlink desired build type - subdirectory required for run_tests
         cmake .. -DCMAKE_PREFIX_PATH=$CONDA_PREFIX \
-                 -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
+                   -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
                  -DCMAKE_BUILD_TYPE=Release \
                  -DCATKIN_SKIP_TESTING=OFF \
+                 -DSETUPTOOLS_DEB_LAYOUT=OFF \
                  -G "Ninja"
         ninja
-        if [[ `uname -s` == "Linux" ]]; then
-          ninja run_tests
-          catkin_test_results
-        fi
+        # NB: We cannot run tests as the ROS packages cannot be resolved.
+        #if [[ `uname -s` == "Linux" ]]; then
+        #  export ROS_PACKAGE_PATH=$CONDA_PREFIX/share
+        #  ninja run_tests
+        #  catkin_test_results
+        #fi
     - name: Build Exotica on Windows
       if: runner.os == 'Windows'
-      working-directory: ./exotica_core
+      working-directory: ./exotica_superbuild
       shell: powershell
       run: |
         micromamba shell hook -s cmd.exe -p C:\Users\runneradmin\micromamba
         Get-Content -Path C:\Users\runneradmin\micromamba\condabin\mamba_hook.bat
     - name: Build Exotica on Windows
       if: runner.os == 'Windows'
-      working-directory: ./exotica_core
+      working-directory: ./exotica_superbuild
       shell: cmd
       run: |
         echo "Remove unnecessary / colliding things from PATH"
@@ -82,6 +86,7 @@ jobs:
                  -DCMAKE_INSTALL_PREFIX="%CONDA_PREFIX%\Library" ^
                  -DCMAKE_BUILD_TYPE=Release ^
                  -DCATKIN_SKIP_TESTING=OFF ^
+                 -DSETUPTOOLS_DEB_LAYOUT=OFF ^
                  -DBoost_USE_STATIC_LIBS=OFF ^
                  -G "Ninja"
         ninja

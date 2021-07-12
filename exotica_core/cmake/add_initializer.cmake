@@ -24,6 +24,7 @@ macro(AddInitializer)
 endmacro(AddInitializer)
 
 macro(GenInitializers)
+  # Note: use optional arguments to specify dependencies
   set(_InitializerProjectFile ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}/${PROJECT_NAME}_initializers_numerator.h)
   include_directories(${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_INCLUDE_DESTINATION})
   add_custom_command(
@@ -32,7 +33,7 @@ macro(GenInitializers)
     DEPENDS ${_InitializerInputFiles} ${_InitializerScriptDir}/generate_initializers.py
   )
   list(APPEND _InitializerOutputFiles)
-  add_custom_target(${PROJECT_NAME}_initializers DEPENDS ${_InitializerOutputFiles})
+  add_custom_target(${PROJECT_NAME}_initializers DEPENDS ${_InitializerOutputFiles} ${ARGN} ${exotica_core_EXPORTED_TARGETS})
 
   install(FILES ${_InitializerOutputFiles} ${_InitializerProjectFile}
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})

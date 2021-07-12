@@ -17,13 +17,19 @@ find_package(catkin REQUIRED COMPONENTS
   exotica_core
   geometry_msgs
   moveit_msgs
-  pybind11_catkin
+  #pybind11_catkin
   shape_msgs
 )
 
+# To support Conda builds using vanilla pybind11, we use a special config that
+# first checks for pybind11_catkin and defaults to pybind11 if not found.
+include(cmake/pybind11_setup.cmake)
+
 catkin_package(
   LIBRARIES
-  CATKIN_DEPENDS exotica_core pybind11_catkin shape_msgs moveit_msgs geometry_msgs
+  CATKIN_DEPENDS exotica_core ${pybind11_catkin_DEPENDENCY}
+  DEPENDS ${pybind11_DEPENDENCY}
+  CFG_EXTRAS pybind11_setup.cmake
 )
 
 pybind11_add_module(_pyexotica MODULE src/pyexotica.cpp)

@@ -1,0 +1,39 @@
+#
+# This project is a convenience wrapper to build Exotica using pure CMake
+# Dependencies must be manually installed and on the CMAKE_PREFIX_PATH before continuing.
+#
+cmake_minimum_required(VERSION 3.0.2)
+project(exotica_superbuild)
+
+
+# Core & Python
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotica_core ${CMAKE_CURRENT_BINARY_DIR}/exotica_core)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotica_python ${CMAKE_CURRENT_BINARY_DIR}/exotica_python)
+
+# Task Maps
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/exotica_core_task_maps ${CMAKE_CURRENT_BINARY_DIR}/exotica_core_task_maps)
+
+# Collision Scenes
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../${CMAKE_CURRENT_SOURCE_DIR}/../exotations/exotica_collision_scene_fcl_latest)  # Requires FCL
+
+# Motion Solvers
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_aico_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_aico_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_ddp_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_ddp_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_ik_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_ik_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_ilqg_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_ilqg_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_ilqr_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_ilqr_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_levenberg_marquardt_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_levenberg_marquardt_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_ompl_control_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_ompl_control_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_ompl_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_ompl_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_scipy_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_scipy_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/solvers/exotica_time_indexed_rrt_connect_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_time_indexed_rrt_connect_solver)
+
+# Dynamics Solvers
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/dynamics_solvers/exotica_cartpole_dynamics_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_cartpole_dynamics_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/dynamics_solvers/exotica_double_integrator_dynamics_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_double_integrator_dynamics_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/dynamics_solvers/exotica_pendulum_dynamics_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_pendulum_dynamics_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/dynamics_solvers/exotica_pinocchio_dynamics_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_pinocchio_dynamics_solver)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotations/dynamics_solvers/exotica_quadrotor_dynamics_solver ${CMAKE_CURRENT_BINARY_DIR}/exotica_quadrotor_dynamics_solver)
+
+# Examples
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../exotica_examples ${CMAKE_CURRENT_BINARY_DIR}/exotica_examples)

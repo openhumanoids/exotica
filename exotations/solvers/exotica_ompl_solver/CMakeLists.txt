@@ -44,7 +44,7 @@ add_library(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${OMPL_LIBRARIES})
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_initializers ${catkin_EXPORTED_TARGETS})
 
-pybind_add_module(${PROJECT_NAME}_py MODULE src/ompl_py.cpp)
+pybind11_add_module(${PROJECT_NAME}_py MODULE src/ompl_py.cpp)
 target_link_libraries(${PROJECT_NAME}_py PRIVATE ${PROJECT_NAME})
 add_dependencies(${PROJECT_NAME}_py ${PROJECT_NAME} ${PROJECT_NAME}_initializers)
 install(TARGETS ${PROJECT_NAME}_py LIBRARY DESTINATION ${CATKIN_GLOBAL_PYTHON_DESTINATION})
